@@ -6,6 +6,10 @@ import { EnviromentConfig } from './environment.types';
 
 export const environment: EnviromentConfig = {
   production: false,
-  BASE_URL: '',
+  BASE_URL: 'http://localhost:3000',
+  endpointUrls: {
+    BASE_URL: 'https://pokeapi.co/api/v2',
+    pokemon: '/pokemon/'
+  },
 };
 

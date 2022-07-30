@@ -1,9 +1,11 @@
 export interface EnviromentConfig {
     BASE_URL: string,
-    apiUrls?: ApiUrlConfig,
+    endpointUrls: ApiUrlConfig,
     production: boolean,
 }
 
 export interface ApiUrlConfig {
-    endpoint: string,
+    BASE_URL: string,
+    pokemon: string,
+
 }
