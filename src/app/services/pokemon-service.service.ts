@@ -9,11 +9,16 @@ export class PokemonService {
 
   constructor(
     private readonly http: HttpClient,
-  ) { this.loadPokemons(); }
-  async loadPokemons() {
-    const req = await this.http.get<any>(`${environment.endpointUrls.BASE_URL}/pokemon/?limit=1000&offset=0`).toPromise();
-    return console.log(req);
+  ) {
+    this.loadPokemons();
   }
 
+  loadPokemons() {
+    const req = this.http.get<any>(`${environment.endpointUrls.BASE_URL}${environment.endpointUrls.pokemon}`);
+    return req;
+  }
 
+  getPokemonData(name: string) {
+    return this.http.get<any>(`${environment.endpointUrls.BASE_URL}${environment.endpointUrls.pokemon}${name}`);
+  }
 }
