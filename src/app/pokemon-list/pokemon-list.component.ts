@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonType } from '../models/pokemon-types.enum';
 import { Pokemon } from '../models/pokemon.model';
+import { PokemonService } from '../services/pokemon-service.service';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -8,10 +9,21 @@ import { Pokemon } from '../models/pokemon.model';
   styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent implements OnInit {
-
-  constructor() { }
+  pokemonsList: any[] = [];
+  constructor(
+    private pokemonService: PokemonService,
+  ) { }
 
   ngOnInit(): void {
+    this.pokemonService.loadPokemons().subscribe((response: any) => {
+      response.results.forEach((result: { name: string; }) => {
+        this.pokemonService.getPokemonData(result.name)
+          .subscribe((uniqueResponse: any) => {
+            this.pokemonsList.push(uniqueResponse);
+          });
+      });;
+    });
+
   }
   public pokemons: Pokemon[] = [
     {
